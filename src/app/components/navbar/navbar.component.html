@@ -1,0 +1,26 @@
+<mat-toolbar color="primary" class="navbar">
+  <span class="logo">Fitness App</span>
+
+  <!-- Desktop Menu -->
+  <span class="spacer"></span>
+  <div class="nav-links">
+    <a mat-button routerLink="/workouts">Workout</a>
+    <a mat-button routerLink="/goals">Goal</a>
+    <a mat-button routerLink="/profile">Profile</a>
+    <a mat-button routerLink="/logout">Logout</a>
+  </div>
+
+  <!-- Mobile Menu Toggle -->
+  <button mat-icon-button class="menu-button" (click)="toggleMenu()">
+    <mat-icon>menu</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- Mobile Menu -->
+<mat-sidenav-container *ngIf="isMenuOpen" class="mobile-menu">
+  <mat-sidenav mode="over" opened="true" (click)="toggleMenu()">
+    <a mat-list-item routerLink="/workouts">Workouts</a>
+    <a mat-list-item routerLink="/goals">Goals</a>
+    <a mat-list-item routerLink="/profile">Profile</a>
+    <a mat-list-item routerLink="/logout">Logout</a>
+  </mat-sidenav>
+</mat-sidenav-container>
