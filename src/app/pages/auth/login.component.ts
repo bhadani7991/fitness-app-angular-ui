@@ -10,7 +10,8 @@ import {
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { LoginServiceService } from '../../../service/login-service.service';
+import { LoginServiceService } from '../../service/login-service.service';
+import { AuthService } from '../../service/auth.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -48,14 +49,21 @@ export class LoginComponent {
   ]);
   matcher = new MyErrorStateMatcher();
 
-  constructor(private readonly loginService: LoginServiceService) {}
+  constructor(
+    private readonly loginService: LoginServiceService,
+    private readonly authService: AuthService
+  ) {}
 
   handleLogin() {
-    this.loginService
-      .login({
-        email: this.emailId.value,
-        password: this.password.value,
-      })
-      .subscribe((value) => console.log(value.entity));
+    try {
+      this.loginService
+        .login({
+          email: this.emailId.value,
+          password: this.password.value,
+        })
+        .subscribe((value) => this.authService.logIn(value.entity._id));
+    } catch (error: any) {
+      console.log(error.message);
+    }
   }
 }

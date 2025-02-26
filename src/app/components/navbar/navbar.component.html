@@ -3,12 +3,14 @@
 
   <!-- Desktop Menu -->
   <span class="spacer"></span>
+  @if(isLoggedIn){
   <div class="nav-links">
     <a mat-button routerLink="/workouts">Workout</a>
     <a mat-button routerLink="/goals">Goal</a>
     <a mat-button routerLink="/profile">Profile</a>
     <a mat-button routerLink="/logout">Logout</a>
   </div>
+  }
 
   <!-- Mobile Menu Toggle -->
   <button mat-icon-button class="menu-button" (click)="toggleMenu()">

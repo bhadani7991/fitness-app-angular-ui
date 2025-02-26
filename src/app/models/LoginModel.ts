@@ -4,6 +4,7 @@ export interface User {
   age: number;
   weight: number;
   createdAt: Date;
+  _id: string;
 }
 
 export interface LoginRequest {
