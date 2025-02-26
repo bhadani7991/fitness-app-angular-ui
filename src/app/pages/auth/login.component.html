@@ -1,35 +1,112 @@
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <mat-label>Email</mat-label>
-    <input
-      type="email"
-      matInput
-      [formControl]="emailId"
-      [errorStateMatcher]="matcher"
-      placeholder="Ex. pat@example.com"
-    />
-    @if (emailId.hasError('email') && !emailId.hasError('required')) {
-    <mat-error>Please enter a valid email address</mat-error>
-    } @if (emailId.hasError('required')) {
-    <mat-error>Email is <strong>required</strong></mat-error>
+<div class="flex justify-center items-center min-h-screen bg-gray-100">
+  <form class="bg-white p-8 rounded-lg shadow-md w-96">
+    <h2 class="text-2xl font-semibold text-center text-gray-700 mb-6">
+      {{ isLoginForm() ? "Login" : "Sign Up" }}
+    </h2>
+    @if (!isLoginForm()) {
+    <div class="mb-4">
+      <mat-form-field class="w-full">
+        <mat-label>Name</mat-label>
+        <input
+          type="text"
+          matInput
+          [formControl]="name"
+          [errorStateMatcher]="matcher"
+          placeholder="Enter Name"
+          class="border rounded-md w-full px-3 py-2"
+        />
+        @if (name.hasError('name') && !name.hasError('required')) {
+        <mat-error>Please enter a valid Name</mat-error>
+        } @if (name.hasError('required')) {
+        <mat-error>Name is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="mb-4">
+      <mat-form-field class="w-full">
+        <mat-label>Age</mat-label>
+        <input
+          type="number"
+          matInput
+          [formControl]="age"
+          [errorStateMatcher]="matcher"
+          placeholder="Enter Age"
+          class="border rounded-md w-full px-3 py-2"
+        />
+        @if (age.hasError('required')) {
+        <mat-error>Age is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="mb-4">
+      <mat-form-field class="w-full">
+        <mat-label>Weight</mat-label>
+        <input
+          type="number"
+          matInput
+          [formControl]="weight"
+          [errorStateMatcher]="matcher"
+          placeholder="Enter Weight"
+          class="border rounded-md w-full px-3 py-2"
+        />
+        @if (weight.hasError('required')) {
+        <mat-error>Weight is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+    </div>
     }
-  </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <mat-label>Password</mat-label>
-    <input
-      type="password"
-      matInput
-      [formControl]="password"
-      [errorStateMatcher]="matcher"
-      placeholder="Ex. pat@example.com"
-    />
+    <div class="mb-4">
+      <mat-form-field class="w-full">
+        <mat-label>Email</mat-label>
+        <input
+          type="email"
+          matInput
+          [formControl]="emailId"
+          [errorStateMatcher]="matcher"
+          placeholder="Ex. pat@example.com"
+          class="border rounded-md w-full px-3 py-2"
+        />
+        @if (emailId.hasError('email') && !emailId.hasError('required')) {
+        <mat-error>Please enter a valid email address</mat-error>
+        } @if (emailId.hasError('required')) {
+        <mat-error>Email is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+    </div>
 
-    @if (password.hasError('email') && !emailId.hasError('required')) {
-    <mat-error>Please enter a valid password</mat-error>
-    } @if (password.hasError('required')) {
-    <mat-error>password is <strong>required</strong></mat-error>
-    }
-  </mat-form-field>
+    <div class="mb-6">
+      <mat-form-field class="w-full">
+        <mat-label>Password</mat-label>
+        <input
+          type="password"
+          matInput
+          [formControl]="password"
+          [errorStateMatcher]="matcher"
+          placeholder="Enter your password"
+          class="border rounded-md w-full px-3 py-2"
+        />
+        @if (password.hasError('required')) {
+        <mat-error>Password is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+    </div>
 
-  <button class="font-bold" (click)="handleLogin()">Login</button>
-</form>
+    <button
+      (click)="isLoginForm() ? handleLogin() : handleSignup()"
+      class="w-full bg-blue-500 text-white font-semibold py-2 rounded-lg hover:bg-blue-600 transition duration-200"
+    >
+      {{ isLoginForm() ? "Login " : "Sign Up" }}
+    </button>
+
+    <p
+      class="text-sm text-gray-600 text-center mt-4 cursor-pointer"
+      (click)="handleToggleLogin()"
+    >
+      {{
+        isLoginForm()
+          ? "Don't have an account? Sign up"
+          : "Existing User, Login Here"
+      }}
+    </p>
+  </form>
+</div>

@@ -12,7 +12,7 @@ export interface LoginRequest {
   password: string | null;
 }
 
-export interface LoginResponse {
+export interface AuthResponse {
   message: string;
   entity: User;
 }

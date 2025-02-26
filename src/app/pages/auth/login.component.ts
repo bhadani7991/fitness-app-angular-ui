@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {
   FormControl,
   FormGroupDirective,
@@ -12,6 +12,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { LoginServiceService } from '../../service/login-service.service';
 import { AuthService } from '../../service/auth.service';
+import { Router } from 'express';
+import { CommonModule } from '@angular/common';
+import { SignUpService } from '../../service/sign-up.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -35,6 +38,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
+    CommonModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
@@ -47,11 +51,16 @@ export class LoginComponent {
       '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$'
     ),
   ]);
+  name = new FormControl<string>('', [Validators.required]);
+  age = new FormControl<number>(0, [Validators.required]);
+  weight = new FormControl<number>(0, [Validators.required]);
   matcher = new MyErrorStateMatcher();
+  isLoginForm = signal<boolean>(true);
 
   constructor(
     private readonly loginService: LoginServiceService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly signUpService: SignUpService
   ) {}
 
   handleLogin() {
@@ -65,5 +74,20 @@ export class LoginComponent {
     } catch (error: any) {
       console.log(error.message);
     }
+  }
+
+  handleSignup() {
+    this.signUpService
+      .handleSignUpRequest({
+        name: this.name.value,
+        email: this.emailId.value,
+        age: this.age.value,
+        weight: this.weight.value,
+        password: this.password.value,
+      })
+      .subscribe((value) => console.log(value.entity));
+  }
+  handleToggleLogin() {
+    this.isLoginForm.set(!this.isLoginForm());
   }
 }

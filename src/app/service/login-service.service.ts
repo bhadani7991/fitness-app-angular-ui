@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { LoginRequest, LoginResponse } from '../models/LoginModel';
+import { AuthResponse, LoginRequest } from '../models/LoginModel';
 import { BASE_URL } from '../utils/appConstant';
 
 @Injectable({
@@ -10,8 +10,8 @@ import { BASE_URL } from '../utils/appConstant';
 export class LoginServiceService {
   constructor(private readonly http: HttpClient) {}
 
-  login(loginRequest: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${BASE_URL}/login`, loginRequest, {
+  login(loginRequest: LoginRequest): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${BASE_URL}/login`, loginRequest, {
       withCredentials: true,
     });
   }
