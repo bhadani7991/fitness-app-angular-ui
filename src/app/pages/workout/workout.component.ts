@@ -1,13 +1,26 @@
-import { Component, OnInit, signal, ViewChild } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { WorkoutModelComponent } from './workout-model/workout-model.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTabsModule } from '@angular/material/tabs';
+import { WorkoutTrendChartComponent } from './workout-trend-chart/workout-trend-chart.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-workout',
-  imports: [],
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    WorkoutModelComponent,
+    WorkoutTrendChartComponent,
+    CommonModule,
+  ],
   templateUrl: './workout.component.html',
   styleUrl: './workout.component.css',
 })
-export class WorkoutComponent {}
+export class WorkoutComponent {
+  activeTab: string = 'tab1';
+
+  setActiveTab(tabName: string) {
+    this.activeTab = tabName;
+  }
+}
