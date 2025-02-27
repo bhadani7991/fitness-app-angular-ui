@@ -12,7 +12,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'workouts',
     pathMatch: 'full',
   }, // Default route
   { path: '**', redirectTo: '/workouts' }, // Wildcard route for unknown paths
