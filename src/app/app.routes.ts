@@ -6,9 +6,9 @@ import { authGuard } from './service/auth.guard';
 import { LoginComponent } from './pages/auth/login.component';
 
 export const routes: Routes = [
-  { path: 'workouts', component: WorkoutComponent },
-  { path: 'goals', component: GoalComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'workouts', component: WorkoutComponent, canActivate: [authGuard] },
+  { path: 'goals', component: GoalComponent, canActivate: [authGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
   { path: 'login', component: LoginComponent },
   {
     path: '',

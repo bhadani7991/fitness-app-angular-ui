@@ -12,9 +12,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { LoginServiceService } from '../../service/login-service.service';
 import { AuthService } from '../../service/auth.service';
-import { Router } from 'express';
 import { CommonModule } from '@angular/common';
 import { SignUpService } from '../../service/sign-up.service';
+import { Route, Router } from '@angular/router';
+import { sign } from 'crypto';
+import { User } from '../../models/LoginModel';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -56,11 +58,20 @@ export class LoginComponent {
   weight = new FormControl<number>(0, [Validators.required]);
   matcher = new MyErrorStateMatcher();
   isLoginForm = signal<boolean>(true);
+  user = signal<User>({
+    name: '',
+    email: '',
+    _id: '',
+    age: 0,
+    weight: 0,
+    createdAt: new Date(),
+  });
 
   constructor(
     private readonly loginService: LoginServiceService,
     private readonly authService: AuthService,
-    private readonly signUpService: SignUpService
+    private readonly signUpService: SignUpService,
+    private readonly router: Router
   ) {}
 
   handleLogin() {
@@ -70,7 +81,11 @@ export class LoginComponent {
           email: this.emailId.value,
           password: this.password.value,
         })
-        .subscribe((value) => this.authService.logIn(value.entity._id));
+        .subscribe((value) => {
+          this.authService.logIn(value.entity._id);
+          this.user.set(value.entity);
+          this.router.navigate(['/workouts']);
+        });
     } catch (error: any) {
       console.log(error.message);
     }

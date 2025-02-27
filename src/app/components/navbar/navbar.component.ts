@@ -6,8 +6,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
+import { SignUpService } from '../../service/sign-up.service';
 
 @Component({
   selector: 'app-navbar',
@@ -27,7 +28,11 @@ export class NavbarComponent implements OnInit {
   isMenuOpen = false;
 
   isLoggedIn = false;
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly signUpService: SignUpService,
+    private readonly router: Router
+  ) {}
   ngOnInit(): void {
     console.log(this.authService.isUserLoggedIn());
     this.isLoggedIn = this.authService.isUserLoggedIn();
@@ -35,5 +40,10 @@ export class NavbarComponent implements OnInit {
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  handleLogout() {
+    this.authService.logOut();
+    this.router.navigate(['/login']);
   }
 }

@@ -1,5 +1,8 @@
 <div class="flex justify-center items-center min-h-screen bg-gray-100">
-  <form class="bg-white p-8 rounded-lg shadow-md w-96">
+  <form
+    (ngSubmit)="isLoginForm() ? handleLogin() : handleSignup()"
+    class="bg-white p-8 rounded-lg shadow-md w-96"
+  >
     <h2 class="text-2xl font-semibold text-center text-gray-700 mb-6">
       {{ isLoginForm() ? "Login" : "Sign Up" }}
     </h2>
@@ -109,4 +112,5 @@
       }}
     </p>
   </form>
+  <p>{{ user().name }}</p>
 </div>

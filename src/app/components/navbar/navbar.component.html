@@ -1,28 +1,42 @@
-<mat-toolbar color="primary" class="navbar">
-  <span class="logo">Fitness App</span>
+<!-- Toolbar / Navbar -->
+<mat-toolbar color="primary" class="navbar bg-blue-500 text-white">
+  <span class="logo text-xl font-bold">Fitness App</span>
 
   <!-- Desktop Menu -->
-  <span class="spacer"></span>
-  @if(isLoggedIn){
-  <div class="nav-links">
-    <a mat-button routerLink="/workouts">Workout</a>
-    <a mat-button routerLink="/goals">Goal</a>
-    <a mat-button routerLink="/profile">Profile</a>
-    <a mat-button routerLink="/logout">Logout</a>
+  <span class="flex-grow"></span>
+  <div *ngIf="isLoggedIn" class="hidden md:flex space-x-4">
+    <a mat-button routerLink="/workouts" class="hover:text-gray-200">Workout</a>
+    <a mat-button routerLink="/goals" class="hover:text-gray-200">Goal</a>
+    <a mat-button routerLink="/profile" class="hover:text-gray-200">Profile</a>
+    <button mat-button (click)="handleLogout()" class="hover:text-gray-200">
+      Logout
+    </button>
   </div>
-  }
 
   <!-- Mobile Menu Toggle -->
-  <button mat-icon-button class="menu-button" (click)="toggleMenu()">
+  <button mat-icon-button class="md:hidden text-white" (click)="toggleMenu()">
     <mat-icon>menu</mat-icon>
   </button>
 </mat-toolbar>
+
 <!-- Mobile Menu -->
-<mat-sidenav-container *ngIf="isMenuOpen" class="mobile-menu">
+<mat-sidenav-container *ngIf="isMenuOpen" class="mobile-menu md:hidden">
   <mat-sidenav mode="over" opened="true" (click)="toggleMenu()">
-    <a mat-list-item routerLink="/workouts">Workouts</a>
-    <a mat-list-item routerLink="/goals">Goals</a>
-    <a mat-list-item routerLink="/profile">Profile</a>
-    <a mat-list-item routerLink="/logout">Logout</a>
+    <a mat-list-item routerLink="/workouts" class="block py-2 text-gray-800"
+      >Workouts</a
+    >
+    <a mat-list-item routerLink="/goals" class="block py-2 text-gray-800"
+      >Goals</a
+    >
+    <a mat-list-item routerLink="/profile" class="block py-2 text-gray-800"
+      >Profile</a
+    >
+    <button
+      mat-list-item
+      (click)="handleLogout()"
+      class="block py-2 text-gray-800"
+    >
+      Logout
+    </button>
   </mat-sidenav>
 </mat-sidenav-container>
