@@ -14,6 +14,8 @@ import { FormsModule } from '@angular/forms';
 import { Workout } from '../../../models/Workout';
 import { WorkoutService } from '../../../service/workout.service';
 import { WorkoutAddDialogComponent } from '../workout-add-dialog/workout-add-dialog.component';
+import { MatIconModule } from '@angular/material/icon';
+import { WorkoutEditDialogComponent } from '../workout-edit-dialog/workout-edit-dialog.component';
 
 @Component({
   selector: 'app-workout-model',
@@ -24,17 +26,18 @@ import { WorkoutAddDialogComponent } from '../workout-add-dialog/workout-add-dia
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
+    MatIconModule,
   ],
   templateUrl: './workout-model.component.html',
   styleUrl: './workout-model.component.css',
 })
 export class WorkoutModelComponent {
   displayedColumns: string[] = [
+    'actions',
     'updatedAt',
     'type',
     'duration',
     'caloriesBurned',
-    '_id',
   ];
 
   workoutDetails = signal<Workout[]>([]);
@@ -67,6 +70,15 @@ export class WorkoutModelComponent {
     this.table?.renderRows();
   }
 
+  deleteElement(element: any): void {
+    this.workoutService.deleteWorkout(element?._id).subscribe((value) => {
+      this.dataSource.data = this.dataSource.data.filter(
+        (workout) => workout._id !== element._id
+      );
+      this.table?.renderRows();
+    });
+  }
+
   removeData() {
     this.dataSource.data = this.dataSource.data.slice(0, -1);
     this.table?.renderRows();
@@ -76,6 +88,17 @@ export class WorkoutModelComponent {
     const dialogRef = this.dialog.open(WorkoutAddDialogComponent, {
       width: '400px', // Optional width
       data: { entity: this.dataSource }, // Optional data
+    });
+
+    // Handle dialog close event
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('Dialog closed', result);
+    });
+  }
+  openEditDialog(element: Workout): void {
+    const dialogRef = this.dialog.open(WorkoutEditDialogComponent, {
+      width: '400px', // Optional width
+      data: { entity: this.dataSource, element: element }, // Optional data
     });
 
     // Handle dialog close event

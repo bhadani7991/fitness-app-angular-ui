@@ -4,6 +4,8 @@ import { BASE_URL } from '../utils/appConstant';
 import { Observable } from 'rxjs';
 import {
   WorkoutAddResponse,
+  WorkoutDeleteResponse,
+  WorkoutEditResponse,
   WorkoutRequest,
   WorkoutResponse,
 } from '../models/Workout';
@@ -27,5 +29,23 @@ export class WorkoutService {
     return this.http.post<WorkoutAddResponse>(`${BASE_URL}/workouts`, workout, {
       withCredentials: true,
     });
+  }
+
+  deleteWorkout(workoutId: string): Observable<WorkoutDeleteResponse> {
+    return this.http.delete<WorkoutDeleteResponse>(
+      `${BASE_URL}/workout/${workoutId}`,
+      { withCredentials: true }
+    );
+  }
+
+  updateWorkout(
+    workoutId: string,
+    workoutupdateRequest: WorkoutRequest
+  ): Observable<WorkoutEditResponse> {
+    return this.http.put<WorkoutEditResponse>(
+      `${BASE_URL}/workout/${workoutId}`,
+      workoutupdateRequest,
+      { withCredentials: true }
+    );
   }
 }

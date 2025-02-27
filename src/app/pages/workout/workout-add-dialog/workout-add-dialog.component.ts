@@ -35,12 +35,6 @@ import { WorkoutService } from '../../../service/workout.service';
   styleUrl: './workout-add-dialog.component.css',
 })
 export class WorkoutAddDialogComponent implements OnInit {
-  matcher = new MyErrorStateMatcher();
-  type = new FormControl<string>('', [Validators.required]);
-  duration = new FormControl<number>(0, [Validators.required]);
-  caloriesBurned = new FormControl<number>(0, [Validators.required]);
-  updatedAt = new FormControl<Date>(new Date(), [Validators.required]);
-
   constructor(
     public dialogRef: MatDialogRef<WorkoutAddDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -49,6 +43,12 @@ export class WorkoutAddDialogComponent implements OnInit {
   ngOnInit(): void {
     //console.log(this.data.entity.data);
   }
+
+  matcher = new MyErrorStateMatcher();
+  type = new FormControl<string>('', [Validators.required]);
+  duration = new FormControl<number>(0, [Validators.required]);
+  caloriesBurned = new FormControl<number>(0, [Validators.required]);
+  updatedAt = new FormControl<Date>(new Date(), [Validators.required]);
 
   closeDialog(): void {
     this.dialogRef.close(); // Close the dialog
@@ -64,15 +64,10 @@ export class WorkoutAddDialogComponent implements OnInit {
       })
       .subscribe((value) => {
         console.log(value.message);
-        this.data.entity.data = [
-          ...this.data.entity.data,
-          {
-            type: this.type.value,
-            duration: this.duration.value,
-            caloriesBurned: this.caloriesBurned.value,
-            updatedAt: this.updatedAt.value,
-          },
-        ];
+        this.workoutService
+          .fetchWorkoutDetails()
+          .subscribe((value) => (this.data.entity.data = value.entity));
+        this.dialogRef.close(); // Close the dialog
       });
   }
 }

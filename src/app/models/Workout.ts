@@ -27,3 +27,9 @@ export interface WorkoutRequest {
 export interface WorkoutAddResponse {
   message: string;
 }
+
+export interface WorkoutDeleteResponse extends WorkoutAddResponse {}
+
+export interface WorkoutEditResponse extends WorkoutAddResponse {
+  updatedData: Workout;
+}
