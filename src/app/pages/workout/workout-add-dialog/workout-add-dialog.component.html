@@ -59,21 +59,17 @@
         }
       </mat-form-field>
     </div>
-
-    <!-- Date -->
-    <div class="mb-6">
+    <div class="mb-4">
+      <!-- Date -->
       <mat-form-field appearance="fill" class="w-full border-0">
         <mat-label>Date</mat-label>
-        <input
-          type="date"
-          matInput
-          [formControl]="updatedAt"
-          [errorStateMatcher]="matcher"
-          class="border rounded-md w-full px-3 py-2"
-        />
-        @if (updatedAt.hasError('required')) {
-        <mat-error>Date is <strong>required</strong></mat-error>
-        }
+        <input matInput [matDatepicker]="picker" [formControl]="updatedAt" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </div>
 

@@ -16,6 +16,7 @@ import { WorkoutService } from '../../../service/workout.service';
 import { WorkoutAddDialogComponent } from '../workout-add-dialog/workout-add-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
 import { WorkoutEditDialogComponent } from '../workout-edit-dialog/workout-edit-dialog.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-workout-model',
@@ -27,6 +28,7 @@ import { WorkoutEditDialogComponent } from '../workout-edit-dialog/workout-edit-
     MatInputModule,
     FormsModule,
     MatIconModule,
+    DatePipe,
   ],
   templateUrl: './workout-model.component.html',
   styleUrl: './workout-model.component.css',

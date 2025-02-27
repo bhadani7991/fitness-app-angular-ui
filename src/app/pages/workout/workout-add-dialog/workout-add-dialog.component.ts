@@ -19,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { MyErrorStateMatcher } from '../../auth/login.component';
 import { WorkoutService } from '../../../service/workout.service';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-workout-add-dialog',
@@ -30,6 +31,7 @@ import { WorkoutService } from '../../../service/workout.service';
     MatInputModule,
     ReactiveFormsModule,
     CommonModule,
+    MatDatepickerModule,
   ],
   templateUrl: './workout-add-dialog.component.html',
   styleUrl: './workout-add-dialog.component.css',

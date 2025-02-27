@@ -17,6 +17,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Workout } from '../../../models/Workout';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-workout-edit-dialog',
@@ -28,6 +29,7 @@ import { Workout } from '../../../models/Workout';
     MatInputModule,
     ReactiveFormsModule,
     CommonModule,
+    MatDatepickerModule,
   ],
   templateUrl: './workout-edit-dialog.component.html',
   styleUrl: './workout-edit-dialog.component.css',
