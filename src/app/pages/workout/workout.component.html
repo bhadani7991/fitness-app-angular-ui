@@ -25,6 +25,7 @@
 
   <div class="p-4">
     <div *ngIf="activeTab === 'tab1'">
+      <h1 *ngIf="user$ | async as user">{{ user.age }}</h1>
       <app-workout-model></app-workout-model>
     </div>
     <div *ngIf="activeTab === 'tab2'">

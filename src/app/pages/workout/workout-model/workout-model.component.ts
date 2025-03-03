@@ -55,7 +55,7 @@ export class WorkoutModelComponent {
   ngOnInit(): void {
     this.workoutService.fetchWorkoutDetails().subscribe((value) => {
       this.workoutDetails.set(value.entity);
-      console.log(value.entity);
+
       // Update dataSource when data is received
       this.dataSource.data = value.entity;
     });
@@ -93,9 +93,7 @@ export class WorkoutModelComponent {
     });
 
     // Handle dialog close event
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('Dialog closed', result);
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
   openEditDialog(element: Workout): void {
     const dialogRef = this.dialog.open(WorkoutEditDialogComponent, {
@@ -104,8 +102,6 @@ export class WorkoutModelComponent {
     });
 
     // Handle dialog close event
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('Dialog closed', result);
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 }

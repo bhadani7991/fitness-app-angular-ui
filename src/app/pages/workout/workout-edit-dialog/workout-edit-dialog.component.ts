@@ -78,7 +78,6 @@ export class WorkoutEditDialogComponent {
         updatedAt: this.updatedAt.value,
       })
       .subscribe((value) => {
-        console.log(value.updatedData);
         this.data.entity.data.forEach((workout: Workout) => {
           if (workout._id === value.updatedData._id) {
             workout.type = value.updatedData.type;

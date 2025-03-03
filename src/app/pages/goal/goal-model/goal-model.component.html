@@ -1,0 +1,48 @@
+<div class="flex flex-col items-center p-4">
+  <!-- Add/Update Goal Button -->
+  <button
+    mat-raised-button
+    (click)="openDialog()"
+    class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 transition duration-200"
+  >
+    Add/Update Goal
+  </button>
+
+  <!-- Goal Card -->
+  <mat-card
+    class="w-full md:w-2/3 lg:w-1/2 mt-6 p-4 shadow-lg rounded-lg border border-gray-200"
+  >
+    <mat-card-header class="flex justify-between items-center">
+      <div class="mx-auto">
+        <mat-card-title class="text-xl font-semibold text-gray-800"
+          >Active Goal</mat-card-title
+        >
+      </div>
+    </mat-card-header>
+
+    <mat-card-content class="p-4">
+      <ul class="space-y-4">
+        <li class="flex justify-between items-center">
+          <span class="font-medium text-gray-600">Target Workouts :</span>
+          <span class="font-semibold text-gray-800">{{
+            goal().workoutsPerWeek
+          }}</span>
+        </li>
+        <li class="flex justify-between items-center">
+          <span class="font-medium text-gray-600">Target Weight:</span>
+          <span class="font-semibold text-gray-800"
+            >{{ goal().targetWeight }} kg</span
+          >
+        </li>
+        <li class="flex justify-between items-center">
+          <span class="font-medium text-gray-600">Calories Burn Goal:</span>
+          <span class="font-semibold text-gray-800"
+            >{{ goal().caloriesBurnedGoal }} cal</span
+          >
+        </li>
+      </ul>
+    </mat-card-content>
+
+    <mat-card-actions class="flex justify-end p-4"> </mat-card-actions>
+  </mat-card>
+</div>

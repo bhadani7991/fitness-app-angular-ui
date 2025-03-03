@@ -34,7 +34,6 @@ export class NavbarComponent implements OnInit {
     private readonly router: Router
   ) {}
   ngOnInit(): void {
-    console.log(this.authService.isUserLoggedIn());
     this.isLoggedIn = this.authService.isUserLoggedIn();
   }
 

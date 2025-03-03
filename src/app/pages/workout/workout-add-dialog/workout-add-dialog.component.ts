@@ -65,7 +65,6 @@ export class WorkoutAddDialogComponent implements OnInit {
         updatedAt: this.updatedAt.value,
       })
       .subscribe((value) => {
-        console.log(value.message);
         this.workoutService
           .fetchWorkoutDetails()
           .subscribe((value) => (this.data.entity.data = value.entity));
