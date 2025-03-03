@@ -18,7 +18,6 @@ export class GoalModelComponent {
     targetWeight: 0,
     workoutsPerWeek: 0,
     caloriesBurnedGoal: 0,
-    updatedAt: new Date(),
   });
 
   ngOnInit(): void {
@@ -33,7 +32,7 @@ export class GoalModelComponent {
   openDialog(): void {
     const dialogRef = this.dialog.open(GoalAddUpdateDialogComponent, {
       width: '400px', // Optional width
-      data: {}, // Optional data
+      data: { goal: this.goal() }, // Optional data
     });
 
     // Handle dialog close event

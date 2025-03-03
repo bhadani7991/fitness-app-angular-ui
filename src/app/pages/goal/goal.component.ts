@@ -12,7 +12,7 @@ import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-goal',
-  imports: [CommonModule, GoalModelComponent, CounterComponent],
+  imports: [CommonModule, GoalModelComponent],
   templateUrl: './goal.component.html',
   styleUrl: './goal.component.css',
 })

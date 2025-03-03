@@ -1,8 +1,7 @@
 export interface Goal {
-  workoutsPerWeek: number;
-  targetWeight: number;
-  caloriesBurnedGoal: number;
-  updatedAt: Date;
+  workoutsPerWeek: number | null;
+  targetWeight: number | null;
+  caloriesBurnedGoal: number | null;
 }
 
 export interface GoalResponse {

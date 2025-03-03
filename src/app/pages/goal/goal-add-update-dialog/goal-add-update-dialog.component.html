@@ -1,1 +1,98 @@
-<p>goal-add-update-dialog works!</p>
+<!-- Dialog Title -->
+<h2 mat-dialog-title class="text-2xl font-semibold text-gray-800 text-center">
+  Add Goal
+</h2>
+
+<!-- Dialog Content -->
+<mat-dialog-content class="p-6">
+  <form class="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm mx-auto">
+    <!-- Workout Type -->
+    <div class="mb-4">
+      <mat-form-field appearance="fill" class="w-full border-0">
+        <mat-label>Target No. Of Workout</mat-label>
+        <input
+          type="number"
+          min="1"
+          matInput
+          [formControl]="workoutsPerWeek"
+          [errorStateMatcher]="matcher"
+          placeholder="e.g., Running, Cycling"
+          class="border rounded-md w-full px-3 py-2"
+        />
+        @if (workoutsPerWeek.hasError('required')) {
+        <mat-error>Workout is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <!-- Duration -->
+    <div class="mb-4">
+      <mat-form-field appearance="fill" class="w-full border-0">
+        <mat-label>Target Weight</mat-label>
+        <input
+          type="number"
+          min="1"
+          matInput
+          [formControl]="targetWeight"
+          [errorStateMatcher]="matcher"
+          placeholder="Enter Workout Duration"
+          class="border rounded-md w-full px-3 py-2"
+        />
+        @if (targetWeight.hasError('required')) {
+        <mat-error>Duration is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <!-- Calories Burned -->
+    <div class="mb-4">
+      <mat-form-field appearance="fill" class="w-full border-0">
+        <mat-label>Target Calories Burned </mat-label>
+        <input
+          type="number"
+          min="1"
+          matInput
+          [formControl]="caloriesBurnedGoal"
+          [errorStateMatcher]="matcher"
+          placeholder="e.g., 250 kcal"
+          class="border rounded-md w-full px-3 py-2"
+        />
+        @if (caloriesBurnedGoal.hasError('required')) {
+        <mat-error>Calories Burned is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <!-- Date 
+      <mat-form-field appearance="fill" class="w-full border-0">
+        <mat-label>Date</mat-label>
+        <input matInput [matDatepicker]="picker" [formControl]="updatedAt" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div> -->
+
+    <!-- Submit Button -->
+    <button
+      (click)="handleSaveUpdateGoal()"
+      class="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition duration-200 shadow-md"
+    >
+      Add Goal
+    </button>
+  </form>
+</mat-dialog-content>
+
+<!-- Dialog Actions -->
+<mat-dialog-actions align="end" class="p-4 flex justify-end">
+  <button
+    mat-button
+    (click)="closeDialog()"
+    class="px-4 py-2 text-gray-600 hover:text-gray-900 transition duration-200"
+  >
+    Close
+  </button>
+</mat-dialog-actions>
